@@ -82,7 +82,8 @@ const RecipeForm = ({ recipe, closeModal }) => {
     }
 
     addNewRecipe(recipeData);
-    return clearFields();
+    clearFields();
+    return closeModal();
   };
 
   return (
@@ -93,7 +94,7 @@ const RecipeForm = ({ recipe, closeModal }) => {
         <Textarea label="Ingredients" name="ingredients" value={ingredients} onChange={onChangeField} />
 
         <div>
-          <Input label="Image" type="file" name="image" onChange={onChangeField} />
+          <Input label="Image" type="file" name="image" accept="image/*" onChange={onChangeField} />
           {progress > 0 && <progress max="100" value={progress} />}
         </div>
         <Textarea label="Description" name="description" value={description} onChange={onChangeField} />

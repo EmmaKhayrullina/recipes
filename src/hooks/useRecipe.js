@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { addRecipe, updateRecipe, removeRecipe } from '../store/actions/recipes';
 import useAlert from './useAlert';
 import fb from '../services/firebase';
 
 const useRecipe = () => {
-  const userId = fb.getUserUid();
+  const userId = useSelector(state => state.user.uid, shallowEqual);
   const dispatch = useDispatch();
   const { showAlertMessage } = useAlert();
 

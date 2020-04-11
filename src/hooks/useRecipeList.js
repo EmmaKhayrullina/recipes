@@ -6,17 +6,15 @@ import useLoader from './useLoader';
 
 const useRecipeList = () => {
   const recipeList = useSelector(state => state.recipes.recipeList, shallowEqual);
+  const userId = useSelector(state => state.user.uid, shallowEqual);
   const dispatch = useDispatch();
-  const userId = fb.getUserUid();
   const { showLoading, hideLoading } = useLoader();
+  const existedData = JSON.parse(localStorage.getItem('userData'));
+
+  const isRecipesExists = existedData.recipes.recipeList.length;
 
   useEffect(() => {
-    // const lsRecipes = localStorage.getItem('recipes');
-    // if (lsRecipes) {
-    //   return dispatch(fetchRecipes(JSON.parse(lsRecipes)));
-    // }
-
-    if (!userId) return;
+    if (isRecipesExists || !userId) return;
 
     const userDoc = fb.db.collection('users').doc(`${userId}`);
 
@@ -37,7 +35,6 @@ const useRecipeList = () => {
         .then(userRecipes => {
           if (userRecipes && userRecipes.length) {
             hideLoading();
-            // localStorage.setItem('recipes', JSON.stringify(userRecipes));
             return dispatch(fetchRecipes(userRecipes));
           }
           return false;
