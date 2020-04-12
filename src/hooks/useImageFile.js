@@ -1,15 +1,12 @@
-import { useSelector, shallowEqual } from 'react-redux';
 import { useState } from 'react';
 import { showAlert } from '../store/actions/app';
-import fb from '../services/firebase';
+import { addFile, getFileUrl, deleteFile } from '../services/fileService';
 
 const useImageFile = oldImage => {
   const [file, setFile] = useState(null);
   const [initialImage, setInitialImage] = useState(oldImage);
-  const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(null);
-  const userUid = useSelector(state => state.user.uid, shallowEqual);
-  const storageRef = fb.fbStorage.ref();
+  const [imageLoading, setImageLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(null);
 
   const handleFileChange = e => {
     e.persist();
@@ -19,12 +16,9 @@ const useImageFile = oldImage => {
   const deleteImage = async imageName => {
     if (!imageName) return;
 
-    await storageRef
-      .child(`${userUid}/${imageName}`)
-      .delete()
-      .catch(error => {
-        showAlert({ text: error.message, type: 'error' });
-      });
+    await deleteFile(imageName).catch(error => {
+      showAlert({ text: error.message, type: 'error' });
+    });
   };
 
   const isImageChanged = () => initialImage && file && initialImage.fileName !== file.name;
@@ -42,26 +36,26 @@ const useImageFile = oldImage => {
     await new Promise(resolve => {
       if (!file) return;
 
-      const uploadTask = storageRef.child(`${userUid}/${file.name}`).put(file);
+      const uploadTask = addFile(file);
 
       uploadTask.on(
         'state_changed',
         snapshot => {
           const percentage = Math.floor((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setProgress(percentage);
-          setLoading(true);
+          setUploadProgress(percentage);
+          setImageLoading(true);
         },
 
         error => {
           showAlert({ text: error.message, type: 'error' });
-          setLoading(false);
+          setImageLoading(false);
         },
 
         async () => {
-          const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+          const downloadUrl = await getFileUrl(uploadTask);
 
-          setProgress(null);
-          setLoading(false);
+          setUploadProgress(null);
+          setImageLoading(false);
           url = downloadUrl;
 
           resolve();
@@ -75,8 +69,8 @@ const useImageFile = oldImage => {
   return {
     handleFileChange,
     uploadData,
-    progress,
-    loading,
+    uploadProgress,
+    imageLoading,
     deleteImage,
     deleteOldImage,
   };

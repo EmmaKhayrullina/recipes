@@ -1,67 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from '../atoms/Form';
 import Button from '../atoms/Button';
 import Input from '../atoms/Input';
 import Textarea from '../atoms/Textarea';
+import CategorySelect from '../molecules/CategorySelect';
+import useRecipeForm from '../../hooks/useRecipeForm';
 import useImageFile from '../../hooks/useImageFile';
+import useModal from '../../hooks/useModal';
 import useRecipe from '../../hooks/useRecipe';
 
-const RecipeForm = ({ recipe, closeModal }) => {
-  const initialRecipe = {
-    id: '',
-    title: '',
-    ingredients: '',
-    description: '',
-    image: null,
-    isEdit: false,
-  };
-  const [recipeFields, setRecipeFields] = useState(recipe || initialRecipe);
-  const { id, title, ingredients, description, image, isEdit } = recipeFields;
-  const { handleFileChange, progress, loading, uploadData, deleteOldImage } = useImageFile(image);
-  const { addNewRecipe, editRecipe } = useRecipe();
+const RecipeForm = ({ recipe }) => {
+  const { recipeFields, onChangeField, onChangeSelect, clearFields } = useRecipeForm(recipe);
+  const { id, isEdit, title, ingredients, category, description, image } = recipeFields;
+  const { handleFileChange, uploadData, deleteOldImage, uploadProgress, imageLoading } = useImageFile(image);
+  const { editRecipe, addNewRecipe } = useRecipe();
+  const { closeModal } = useModal();
 
-  const onChangeField = event => {
-    const { name, value } = event.target;
-
-    if (name === 'image') {
-      handleFileChange(event);
-      const file = event.target.files[0];
-
-      if (file) {
-        return setRecipeFields(fields => ({ ...fields, [name]: { fileName: file.name } }));
-      }
-    }
-
-    return setRecipeFields(fields => ({ ...fields, [name]: value }));
+  const onChangeImage = e => {
+    handleFileChange(e);
+    onChangeField(e);
   };
 
   const cancelSaving = () => {
     if (id) {
-      return editRecipe({ id, isEdit: false });
+      editRecipe({ ...recipe, isEdit: false });
+      return;
     }
-    return closeModal();
-  };
-
-  const clearFields = () => {
-    setRecipeFields(fields => {
-      const emptyFields = {};
-
-      Object.keys(fields).map(key => {
-        switch (key) {
-          case 'image':
-            emptyFields[key] = null;
-            break;
-          case 'isEdit':
-            emptyFields[key] = false;
-            break;
-          default:
-            emptyFields[key] = '';
-        }
-        return key;
-      });
-
-      return { ...fields, ...emptyFields };
-    });
+    closeModal();
   };
 
   const handleSubmit = async e => {
@@ -72,11 +37,11 @@ const RecipeForm = ({ recipe, closeModal }) => {
       const url = await uploadData();
       recipeData = {
         ...recipeFields,
-        image: { ...recipeFields.image, url },
+        image: { ...image, url },
       };
     }
 
-    if (id) {
+    if (recipeFields.id) {
       deleteOldImage();
       return editRecipe({ ...recipeData, isEdit: !isEdit });
     }
@@ -88,22 +53,24 @@ const RecipeForm = ({ recipe, closeModal }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input label="Title" name="title" value={title} onChange={onChangeField} />
+      <Input label="Title" name="title" value={title} onChange={onChangeField} maxLength="100" required />
 
       <div>
-        <Textarea label="Ingredients" name="ingredients" value={ingredients} onChange={onChangeField} />
+        <Textarea label="Ingredients" name="ingredients" value={ingredients} onChange={onChangeField} required />
 
         <div>
-          <Input label="Image" type="file" name="image" accept="image/*" onChange={onChangeField} />
-          {progress > 0 && <progress max="100" value={progress} />}
+          <Input label="Image" type="file" name="image" accept="image/*" onChange={onChangeImage} />
+          {uploadProgress > 0 && <progress max="80" value={uploadProgress} />}
         </div>
+
+        <CategorySelect label="Category" name="category" filter={category} onChange={onChangeSelect} />
         <Textarea label="Description" name="description" value={description} onChange={onChangeField} />
 
         <div>
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={imageLoading}>
             {id ? 'Update' : 'Save'}
           </Button>
-          <Button onClick={cancelSaving} disabled={loading}>
+          <Button onClick={cancelSaving} disabled={imageLoading}>
             Cancel
           </Button>
         </div>

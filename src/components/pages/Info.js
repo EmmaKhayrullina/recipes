@@ -8,7 +8,7 @@ const InfoWrapper = styled.div`
 
 const Info = () => (
   <MainTemplate>
-    <InfoWrapper>Info page</InfoWrapper>
+    <InfoWrapper data-testid="test-info-page">Info page</InfoWrapper>
   </MainTemplate>
 );
 

@@ -21,11 +21,13 @@ const loadFromLocalStorage = () => {
 
 const persistedState = loadFromLocalStorage();
 
+/* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
   persistedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
+/* eslint-enable no-underscore-dangle */
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 

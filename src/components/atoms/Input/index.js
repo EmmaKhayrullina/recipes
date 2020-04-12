@@ -3,9 +3,9 @@ import FieldWrapper from '../FieldWrapper';
 import Label from '../Label';
 
 const Input = props => {
-  const { type, label, className, value, name, disabled, accept, onChange, errorMessage } = props;
+  const { type, label, className, value, name, disabled, required, accept, onChange, maxLength, errorMessage } = props;
   const inputType = type || 'text';
-  const inputId = `input-${Math.random()}`;
+  const inputId = `input-${name}`;
 
   return (
     <FieldWrapper className={className}>
@@ -17,10 +17,16 @@ const Input = props => {
         name={name}
         accept={accept}
         disabled={disabled}
+        required={required}
+        maxLength={maxLength}
         onChange={onChange}
       />
 
-      <span>{errorMessage}</span>
+      {maxLength && value && value.length === +maxLength ? (
+        <span>Must be {maxLength} characters or less</span>
+      ) : (
+        <span>{errorMessage}</span>
+      )}
     </FieldWrapper>
   );
 };

@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
   h1,
   h2 {
     margin: 0 0 15px;
+    word-break: break-all;
   }
 
   h2 {
@@ -74,6 +75,12 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 8px 10px;
     border: 1px solid var(--border-color);
+  }
+
+  textarea + span,
+  input + span {
+    color: tomato;
+    font-size: var(--font-size--small);
   }
 
   select:focus,

@@ -1,4 +1,4 @@
-import { SHOW_MODAL, HIDE_MODAL, HIDE_ALERT, SHOW_ALERT, SHOW_LOADER, HIDE_LOADER } from './actionTypes';
+import { SHOW_MODAL, HIDE_MODAL, HIDE_ALERT, SHOW_ALERT, SET_FILTER } from './actionTypes';
 
 export const hideModal = () => {
   return {
@@ -25,14 +25,9 @@ export const hideAlert = () => {
   };
 };
 
-export const showLoader = () => {
+export const setFilter = filter => {
   return {
-    type: SHOW_LOADER,
-  };
-};
-
-export const hideLoader = () => {
-  return {
-    type: HIDE_LOADER,
+    type: SET_FILTER,
+    payload: filter,
   };
 };

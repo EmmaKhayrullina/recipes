@@ -20,7 +20,7 @@ export const addRecipe = recipe => {
   };
 };
 
-export const updateRecipe = fields => {
+export const updateRecipeFields = fields => {
   return {
     type: UPDATE_RECIPE,
     payload: fields,

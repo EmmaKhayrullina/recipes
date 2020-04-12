@@ -41,8 +41,21 @@ const Description = styled.div`
 `;
 
 const Text = styled.p`
+  position: relative;
+  max-height: 130px;
+  overflow: hidden;
   margin: 0 0 15px;
   white-space: pre-line;
+  word-break: break-all;
+`;
+
+const Ellipsis = styled.span`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  background: linear-gradient(transparent, var(--white-color));
 `;
 
 const Actions = styled.div`
@@ -69,29 +82,35 @@ const Recipe = ({ recipe }) => {
     if (image) deleteImage(image.fileName);
   };
 
+  const isTextLong = text => text.split('\n').length > 6 || text.length > 198;
+
   return (
     <li>
       <Wrapper>
         <Photo>{image ? <img src={image.url} alt="recipe" /> : <FontAwesomeIcon icon={faUtensils} />}</Photo>
 
         <Description>
-          <h2>{title}</h2>
+          <a href={`/${id}`}>
+            <h2>{title}</h2>
+          </a>
 
           <Text>
             <strong>Ingredients:</strong>
             <br />
             {ingredients}
+            {isTextLong(ingredients) && <Ellipsis />}
           </Text>
 
           <Text>
             <strong>Description:</strong>
             <br />
             {description}
+            {isTextLong(description) && <Ellipsis />}
           </Text>
 
           <Actions>
-            <Button className="rounded" icon={faEdit} onClick={showEditForm} />
-            <Button className="rounded" onClick={deleteCurrentRecipe} icon={faTrashAlt} />
+            <Button className="rounded" title="edit" icon={faEdit} onClick={showEditForm} />
+            <Button className="rounded" title="delete" onClick={deleteCurrentRecipe} icon={faTrashAlt} />
           </Actions>
         </Description>
       </Wrapper>

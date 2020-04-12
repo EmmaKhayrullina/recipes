@@ -1,50 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { fetchRecipes } from '../store/actions/recipes';
-import fb from '../services/firebase';
-import useLoader from './useLoader';
+import { getList } from '../services/recipeService';
 
 const useRecipeList = () => {
-  const recipeList = useSelector(state => state.recipes.recipeList, shallowEqual);
+  const recipeList = useSelector(state => state.recipes, shallowEqual);
   const userId = useSelector(state => state.user.uid, shallowEqual);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const { showLoading, hideLoading } = useLoader();
   const existedData = JSON.parse(localStorage.getItem('userData'));
-
-  const isRecipesExists = existedData.recipes.recipeList.length;
+  const isRecipesExists = existedData ? existedData.recipes.length : false;
 
   useEffect(() => {
-    if (isRecipesExists || !userId) return;
+    const getRecipes = async () => {
+      try {
+        setLoading(true);
+        const userRecipes = await getList();
 
-    const userDoc = fb.db.collection('users').doc(`${userId}`);
-
-    const fetchRecipeList = async () => {
-      showLoading();
-
-      await userDoc
-        .get()
-        .then(doc => {
-          let userRecipes;
-
-          if (doc.exists) {
-            const { recipes } = doc.exists ? doc.data() : null;
-            userRecipes = Object.keys(recipes).map(recipe => recipes[recipe]);
-          }
-          return userRecipes;
-        })
-        .then(userRecipes => {
-          if (userRecipes && userRecipes.length) {
-            hideLoading();
-            return dispatch(fetchRecipes(userRecipes));
-          }
-          return false;
-        });
+        if (userRecipes) {
+          dispatch(fetchRecipes(userRecipes));
+        }
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
     };
+    if (userId && !isRecipesExists) {
+      getRecipes();
+    }
 
-    fetchRecipeList();
-  }, [userId, dispatch]);
+    return () => isRecipesExists;
+  }, [isRecipesExists, userId, dispatch]);
 
   return {
+    loading,
     recipeList,
   };
 };

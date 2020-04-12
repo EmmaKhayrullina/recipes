@@ -1,36 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import FieldWrapper from '../FieldWrapper';
-import Label from '../Label';
+import FieldWrapper from '../atoms/FieldWrapper';
+import Label from '../atoms/Label';
+import useCategorySelect from '../../hooks/useCategorySelect';
 
 const StyledSelect = styled(Select)`
   > div {
     min-width: 150px;
+    border-color: var(--border-color);
   }
 
   & > div:hover,
   & > div:focus {
-    border-color: var(--border-color-focus);
+    border-color: var(--border-color);
     box-shadow: 0 3px 5px 2px var(--border-color);
     outline: none;
   }
 `;
 
-const CustomSelect = props => {
-  const { label, value, onChange, className, options, name } = props;
-  const selectId = `${label}-${Math.random()}`;
+const CategorySelect = ({ label, name, className, filter, onChange }) => {
+  const selectId = name;
+  const { categories, handleChangeCategory, currentValue } = useCategorySelect(filter);
+
+  const handleChange = option => {
+    handleChangeCategory(option);
+    onChange(option);
+  };
 
   return (
     <FieldWrapper className={className}>
       <Label htmlFor={selectId}>{label}</Label>
 
       <StyledSelect
-        id={selectId}
+        label={label}
         name={name}
-        value={value}
-        onChange={onChange}
-        options={options}
+        value={currentValue}
+        options={categories}
+        onChange={handleChange}
         theme={theme => ({
           ...theme,
           borderRadius: 0,
@@ -46,4 +53,4 @@ const CustomSelect = props => {
   );
 };
 
-export default CustomSelect;
+export default CategorySelect;

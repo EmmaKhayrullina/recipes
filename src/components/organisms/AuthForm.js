@@ -14,8 +14,12 @@ const FieldActions = styled.div`
 `;
 
 const AuthForm = props => {
-  const { email, password, pageName, history } = props;
-  const [user, setUser] = useState({ email, password });
+  const {
+    user: { email },
+    pageName,
+    history,
+  } = props;
+  const [user, setUser] = useState({ email, password: '' });
   const { signUpUser, signInUser } = useAuth();
 
   const onChangeField = event => {
@@ -23,13 +27,11 @@ const AuthForm = props => {
     setUser(userData => ({ ...userData, [name]: value }));
   };
 
-  const onSubmitHandler = e => {
-    if (e) e.preventDefault();
-  };
-
   const redirectToHome = () => history.replace('/');
 
-  const onClickHandler = () => {
+  const onSubmitHandler = e => {
+    if (e) e.preventDefault();
+
     if (pageName === 'Login') {
       return signInUser(user.email, user.password, redirectToHome);
     }
@@ -37,16 +39,14 @@ const AuthForm = props => {
   };
 
   return (
-    <Form onSubmit={onSubmitHandler}>
-      <Input type="email" label="Email" name="email" onChange={onChangeField} />
-      <Input type="password" label="Password" name="password" onChange={onChangeField} />
+    <Form onSubmit={onSubmitHandler} data-testid={`test-${pageName.toLowerCase()}-form`}>
+      <Input type="email" label="Email" name="email" value={user.email} onChange={onChangeField} />
+      <Input type="password" label="Password" name="password" value={user.password} onChange={onChangeField} />
 
       <FieldActions>
         {pageName === 'Login' ? <Link to="/registration">Registration</Link> : <Link to="/login">Login</Link>}
 
-        <Button type="submit" onClick={onClickHandler}>
-          {pageName}
-        </Button>
+        <Button type="submit">{pageName}</Button>
       </FieldActions>
     </Form>
   );

@@ -1,9 +1,9 @@
-import { SHOW_MODAL, HIDE_MODAL, SHOW_ALERT, HIDE_ALERT, SHOW_LOADER, HIDE_LOADER } from '../actions/actionTypes';
+import { SHOW_MODAL, HIDE_MODAL, SHOW_ALERT, HIDE_ALERT, SET_FILTER } from '../actions/actionTypes';
 
-const initialState = {
+export const initialState = {
   isModalOpen: false,
   alert: null,
-  loading: false,
+  filter: 'all',
 };
 
 const appReducer = (state = initialState, action) => {
@@ -16,10 +16,8 @@ const appReducer = (state = initialState, action) => {
       return { ...state, alert: action.payload };
     case HIDE_ALERT:
       return { ...state, alert: null };
-    case SHOW_LOADER:
-      return { ...state, loading: true };
-    case HIDE_LOADER:
-      return { ...state, loading: false };
+    case SET_FILTER:
+      return { ...state, filter: action.payload };
     default:
       return state;
   }

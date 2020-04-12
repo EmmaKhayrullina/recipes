@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
 
-const config = {
+export const config = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -14,26 +14,6 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-class Firebase {
-  constructor() {
-    firebase.initializeApp(config);
-    this.auth = firebase.auth();
-    this.db = firebase.firestore();
-    this.fbStorage = firebase.storage();
-    this.fieldValue = firebase.firestore.FieldValue;
-  }
+firebase.initializeApp(config);
 
-  register(email, password) {
-    return this.auth.createUserWithEmailAndPassword(email, password);
-  }
-
-  login(email, password) {
-    return this.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  signOut() {
-    return this.auth.signOut();
-  }
-}
-
-export default new Firebase();
+export default firebase;

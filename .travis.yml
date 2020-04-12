@@ -1,0 +1,16 @@
+language: node_js
+sudo: false
+cache: yarn
+node_js: 13
+script: yarn lint && yarn lint:css && yarn test:ci && yarn build
+deploy:
+  provider: heroku
+  api_key:
+    secure: F8/b7lRTwyAMvdx72tlVtYS791bJ5mY2q7rDR45byqyRfTnaUFJevr16GJmA85dq5FaAnCZrK9gkh6ioEP87JRG/YO4QiPvm/50NQwaInZUg1WUbnyWruhdSJfvEtr16kE5YApTdA7BARyyUgGWMr+CS/7NLvOIhRF8tAU716SiV6gmIK4iVzDOyGiY5wL6PHrrjmHzltjs7IyfdDpyNgMxecV/ONBMqS/EruMS93yxZfAd3tefHlJHR3dr63WQrFkKKSTa+H2Kd2ewsjqKE7jTy5hV02CkKfA09THeXMfQTtgrZMqreJKN038QKDgwLqKfoApq9X0nnkELBUavl5I1yUNq0PGV4XBac7D47hsQRNuvXLc7u6MA7J/DuRVQMcNgpeaCoT3iFUMPgixiL4B+8x3fHqwJTVjPIpQf+Hh+KnZjilWMM700XHR9+/5uVgSyEXrTYkp5M5riEFvNjwM7+MT9F4D4pgp8ev0q19SQDKbSRXVZcTZ3Lp3ueca077aTea8vTAiff1laR23xn5JxlJK8YzpTfBut0vtAqN5FIMUjFpP7T5WSxlxZ02xwbJdrY5Tqs0xFy6ZZ89mb49mD4wCil7D7z0zCO0zbRyuiPsHWAIJRNVR0S+CuHVHjifYLEZmoIIQWHygIJ0JeTbtalrECyvqhxrG/TRyD8wfY=
+  app: react-firebase-recipes
+  on:
+    repo: EmmaKhayrullina/recipes
+  skip_cleanup: 'true'
+git:
+  depth: 25
+  quiet: true
