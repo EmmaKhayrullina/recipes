@@ -3,7 +3,7 @@ import firebase from './firebase';
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-export const getList = async () => {
+export default async () => {
   try {
     const userId = auth.currentUser.uid;
 

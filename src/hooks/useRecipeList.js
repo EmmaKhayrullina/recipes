@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { fetchRecipes } from '../store/actions/recipes';
-import { getList } from '../services/recipeService';
+import getList from '../services/recipeService';
 
 const useRecipeList = () => {
   const recipeList = useSelector(state => state.recipes, shallowEqual);
@@ -25,7 +25,7 @@ const useRecipeList = () => {
         setLoading(false);
       }
     };
-    if (userId && !isRecipesExists) {
+    if (!isRecipesExists) {
       getRecipes();
     }
 
