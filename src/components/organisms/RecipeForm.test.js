@@ -68,13 +68,14 @@ describe('RecipeForm component', () => {
     container = renderRecipeForm();
   });
 
-  test('should add recipe', () => {
+  test('should add new recipe', () => {
     // Arrange
     const { clearFields } = useRecipeForm();
     const { addNewRecipe } = useRecipe();
     const { closeModal } = useModal();
 
     // Act
+    // simulate input required fields
     container.find('form').simulate('submit');
 
     // Assert
