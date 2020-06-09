@@ -1,8 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import store from '../../store/store';
-import Recipe from './Recipe';
+import RecipeItem from './RecipeItem';
 import useImageFile from '../../hooks/useImageFile';
 import useRecipe from '../../hooks/useRecipe';
 import recipesData from '../../__mocks__/recipesData';
@@ -32,7 +33,9 @@ describe('Recipe component', () => {
   beforeEach(() => {
     container = mount(
       <Provider store={store}>
-        <Recipe recipe={recipe} />
+        <BrowserRouter>
+          <RecipeItem recipe={recipe} />
+        </BrowserRouter>
       </Provider>,
     );
   });

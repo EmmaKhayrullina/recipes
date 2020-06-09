@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../../store/store';
@@ -9,7 +9,7 @@ import useAuth from '../../hooks/useAuth';
 jest.mock('../../hooks/useAuth');
 
 const renderAuthForm = (pageName, user) => {
-  return mount(
+  return render(
     <Provider store={store}>
       <MemoryRouter>
         <AuthForm user={user} pageName={pageName} />
@@ -19,7 +19,6 @@ const renderAuthForm = (pageName, user) => {
 };
 
 describe('AuthForm component', () => {
-  let container;
   const signUp = jest.fn();
   const signIn = jest.fn();
   const mockUseAuth = jest.fn(() => ({
@@ -32,8 +31,12 @@ describe('AuthForm component', () => {
   beforeEach(() => {
     const pageName = 'Login';
     const user = { email: '', uid: '' };
+    renderAuthForm(pageName, user);
+  });
 
-    container = renderAuthForm(pageName, user);
+  test('should render login form', () => {
+    // Assert
+    expect(screen.getByTestId('test-login-form')).toMatchSnapshot();
   });
 
   test('should submit login form', () => {
@@ -41,28 +44,36 @@ describe('AuthForm component', () => {
     const { signInUser } = useAuth();
 
     // Act
-    container.find('form').simulate('submit');
+    fireEvent.submit(screen.getByRole('button'), { name: /login/i });
 
     // Assert
-    expect(container.find('button[type="submit"]').text()).toBe('Login');
     expect(signInUser).toHaveBeenCalled();
+  });
+
+  test('should render registration form', () => {
+    // Arrange
+    const pageName = 'Registration';
+    const user = { email: 'test@test.com', uid: '123456' };
+
+    // Act
+    renderAuthForm(pageName, user);
+
+    // Assert
+    expect(screen.getByTestId('test-registration-form')).toMatchSnapshot();
   });
 
   test('should register user', () => {
     // Arrange
     const { signUpUser } = useAuth();
-    const preventDefault = jest.fn();
     const pageName = 'Registration';
     const user = { email: 'test@test.com', uid: '123456' };
 
-    container = renderAuthForm(pageName, user);
+    renderAuthForm(pageName, user);
 
     // Act
-    container.find('form').simulate('submit', { preventDefault });
+    fireEvent.submit(screen.getByRole('button', { name: /registration/i }));
 
     // Assert
-    expect(container.find('button[type="submit"]').text()).toBe('Registration');
-    expect(preventDefault).toHaveBeenCalled();
     expect(signUpUser).toHaveBeenCalled();
   });
 
@@ -70,15 +81,15 @@ describe('AuthForm component', () => {
     // Arrange
     const expectedEmailValue = 'test@test.com';
     const expectedPasswordValue = '123456';
+    const email = screen.getByRole('textbox', { name: /email/i });
+    const password = screen.getByLabelText(/password/i);
 
     // Act
-    container.find('input[type="email"]').simulate('change', { target: { name: 'email', value: expectedEmailValue } });
-    container
-      .find('input[type="password"]')
-      .simulate('change', { target: { name: 'password', value: expectedPasswordValue } });
+    fireEvent.change(email, { target: { name: 'email', value: expectedEmailValue } });
+    fireEvent.change(password, { target: { name: 'password', value: expectedPasswordValue } });
 
     // Assert
-    expect(container.find('input[type="email"]').prop('value')).toEqual(expectedEmailValue);
-    expect(container.find('input[type="password"]').prop('value')).toEqual(expectedPasswordValue);
+    expect(email.value).toEqual(expectedEmailValue);
+    expect(password.value).toEqual(expectedPasswordValue);
   });
 });

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import Recipe from './Recipe';
+import RecipeItem from './RecipeItem';
 import RecipeForm from '../organisms/RecipeForm';
+import InfoText from '../atoms/InfoText';
 
 const RecipesList = styled.ul`
   display: grid;
@@ -28,30 +29,26 @@ const RecipesList = styled.ul`
   }
 `;
 
-const Paragraph = styled.p`
-  text-align: center;
-`;
-
 const RecipeList = ({ recipes }) => {
   const filter = useSelector(state => state.app.filter).toLowerCase();
   const filteredRecipes = recipes.filter(recipe => (filter === 'all' ? recipe : recipe.category === filter));
 
   if (filteredRecipes.length) {
     return (
-      <RecipesList>
+      <RecipesList data-testid="test-recipe-list">
         {filteredRecipes.map(recipe =>
           recipe.isEdit ? (
             <li key={recipe.id}>
               <RecipeForm recipe={recipe} />
             </li>
           ) : (
-            <Recipe key={recipe.id} recipe={recipe} />
+            <RecipeItem key={recipe.id} recipe={recipe} />
           ),
         )}
       </RecipesList>
     );
   }
-  return <Paragraph>There are no recipes in this category</Paragraph>;
+  return <InfoText>There are no recipes in this category</InfoText>;
 };
 
 export default RecipeList;

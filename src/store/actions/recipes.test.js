@@ -1,6 +1,7 @@
-import { UPDATE_RECIPE, ADD_RECIPE, REMOVE_RECIPE, FETCH_RECIPES, REMOVE_ALL_RECIPES } from './actionTypes';
+import { UPDATE_RECIPE, ADD_RECIPE, REMOVE_RECIPE, FETCH_RECIPES, RESET_APP } from './actionTypes';
 import recipes from '../../__mocks__/recipesData';
-import { fetchRecipes, addRecipe, updateRecipeFields, removeRecipe, removeAllRecipes } from './recipes';
+import { fetchRecipes, addRecipe, updateRecipeFields, removeRecipe } from './recipes';
+import { resetApp } from './app';
 
 describe('Recipes actions', () => {
   test('should fetch recipes', () => {
@@ -12,18 +13,6 @@ describe('Recipes actions', () => {
 
     // Act
     const actualResult = fetchRecipes(recipes);
-
-    // Assert
-    expect(actualResult).toEqual(expectedAction);
-  });
-
-  test('should remove all recipes', () => {
-    // Arrange
-    const expectedAction = {
-      type: REMOVE_ALL_RECIPES,
-    };
-    // Act
-    const actualResult = removeAllRecipes();
 
     // Assert
     expect(actualResult).toEqual(expectedAction);
@@ -54,7 +43,7 @@ describe('Recipes actions', () => {
     // Arrange
     const updatedData = {
       id: '1e576evof',
-      description: 'Mix',
+      description: 'description',
       isEdit: false,
     };
     const expectedAction = {
@@ -77,6 +66,15 @@ describe('Recipes actions', () => {
     };
     // Act
     const actualResult = removeRecipe(id);
+    // Assert
+    expect(actualResult).toEqual(expectedAction);
+  });
+
+  test('should reset recipes', () => {
+    // Arrange
+    const expectedAction = { type: RESET_APP };
+    // Act
+    const actualResult = resetApp();
     // Assert
     expect(actualResult).toEqual(expectedAction);
   });

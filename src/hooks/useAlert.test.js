@@ -31,6 +31,7 @@ describe('useAlert hook', () => {
 
     // Act
     act(() => result.current.hideAlertMessage());
+
     // Assert
     expect(result.current.alert).toBe(null);
   });

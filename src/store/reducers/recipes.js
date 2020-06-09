@@ -1,11 +1,9 @@
-import { FETCH_RECIPES, REMOVE_ALL_RECIPES, ADD_RECIPE, REMOVE_RECIPE, UPDATE_RECIPE } from '../actions/actionTypes';
+import { FETCH_RECIPES, ADD_RECIPE, REMOVE_RECIPE, UPDATE_RECIPE, RESET_APP } from '../actions/actionTypes';
 
 const recipesReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_RECIPES:
       return action.payload;
-    case REMOVE_ALL_RECIPES:
-      return [];
     case ADD_RECIPE:
       return [...state, action.payload];
     case UPDATE_RECIPE:
@@ -14,6 +12,8 @@ const recipesReducer = (state = [], action) => {
       });
     case REMOVE_RECIPE:
       return state.filter(recipe => recipe.id !== action.payload);
+    case RESET_APP:
+      return [];
     default:
       return state;
   }

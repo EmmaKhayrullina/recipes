@@ -12,6 +12,7 @@ const StyledLoader = styled.div`
   display: inline-block;
   width: 80px;
   height: 80px;
+  text-align: center;
 
   &::after {
     content: ' ';

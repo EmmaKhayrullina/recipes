@@ -1,4 +1,4 @@
-import { SHOW_MODAL, HIDE_MODAL, HIDE_ALERT, SHOW_ALERT, SET_FILTER } from './actionTypes';
+import { SHOW_MODAL, HIDE_MODAL, HIDE_ALERT, SHOW_ALERT, SET_FILTER, RESET_APP } from './actionTypes';
 
 export const hideModal = () => {
   return {
@@ -29,5 +29,11 @@ export const setFilter = filter => {
   return {
     type: SET_FILTER,
     payload: filter,
+  };
+};
+
+export const resetApp = () => {
+  return {
+    type: RESET_APP,
   };
 };

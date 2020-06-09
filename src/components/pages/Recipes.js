@@ -10,6 +10,7 @@ import RecipeForm from '../organisms/RecipeForm';
 import useModal from '../../hooks/useModal';
 import useRecipeList from '../../hooks/useRecipeList';
 import useAuth from '../../hooks/useAuth';
+import InfoText from '../atoms/InfoText';
 
 const Recipes = () => {
   const { isModalOpen, closeModal } = useModal();
@@ -23,7 +24,13 @@ const Recipes = () => {
           <Title>Your recipes</Title>
           <RecipesActions />
 
-          {recipeList.length ? <RecipeList recipes={recipeList} /> : loading ? <Loader /> : <p>You have no recipes</p>}
+          {recipeList.length ? (
+            <RecipeList recipes={recipeList} />
+          ) : loading ? (
+            <Loader />
+          ) : (
+            <InfoText>You have no recipes</InfoText>
+          )}
 
           {isModalOpen && (
             <Modal closeModal={closeModal}>

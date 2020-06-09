@@ -1,12 +1,8 @@
 import React from 'react';
-// import configureStore from 'redux-mock-store';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import useModal from './useModal';
 import store from '../store/store';
-
-// const mockStore = configureStore([]);
-// const store = mockStore({ app: { isModalOpen: false } });
 
 describe('useModal hook', () => {
   const wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;

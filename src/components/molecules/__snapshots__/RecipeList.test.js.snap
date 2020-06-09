@@ -1,0 +1,382 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeList component should render paragraph 1`] = `
+<p
+  class="sc-fzpans loIBjv"
+>
+  There are no recipes in this category
+</p>
+`;
+
+exports[`RecipeList component should render recipe list 1`] = `
+<ul
+  class="sc-fzplWN cDxAGU"
+  data-testid="test-recipe-list"
+>
+  <li>
+    <form
+      class="sc-Axmtr cfxThk"
+    >
+      <div
+        class="sc-AxmLO bDjjog"
+      >
+        <label
+          class="sc-fzozJi dDbuzB"
+          for="input-title"
+        >
+          Title
+        </label>
+        <input
+          id="input-title"
+          maxlength="100"
+          name="title"
+          required=""
+          type="text"
+          value="Avocado salad"
+        />
+        <span />
+      </div>
+      <div>
+        <div
+          class="sc-AxmLO bDjjog"
+        >
+          <label
+            class="sc-fzozJi dDbuzB"
+            for="textarea-ingredients"
+          >
+            Ingredients
+          </label>
+          <textarea
+            id="textarea-ingredients"
+            name="ingredients"
+            required=""
+          >
+            avocado pepper tomato salad leaf lemon oil
+          </textarea>
+          <span />
+        </div>
+        <div>
+          <div
+            class="sc-AxmLO bDjjog"
+          >
+            <label
+              class="sc-fzozJi dDbuzB"
+              for="input-image"
+            >
+              Image
+            </label>
+            <input
+              accept="image/*"
+              id="input-image"
+              name="image"
+              type="file"
+              value=""
+            />
+            <span />
+          </div>
+        </div>
+        <div
+          class="sc-AxmLO bDjjog"
+        >
+          <label
+            class="sc-fzozJi dDbuzB"
+            for="category"
+          >
+            Category
+          </label>
+          <div
+            class="sc-fzoLsD dScOJd css-2b097c-container"
+          >
+            <div
+              class=" css-e56m7-control"
+            >
+              <div
+                class=" css-g1d714-ValueContainer"
+              >
+                <div
+                  class=" css-1uccc91-singleValue"
+                >
+                  Salads
+                </div>
+                <div
+                  class="css-b8ldur-Input"
+                >
+                  <div
+                    class=""
+                    style="display: inline-block;"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
+                      id="react-select-2-input"
+                      spellcheck="false"
+                      style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class=" css-1hb7zxy-IndicatorsContainer"
+              >
+                <span
+                  class=" css-1okebmr-indicatorSeparator"
+                />
+                <div
+                  aria-hidden="true"
+                  class=" css-tlfecz-indicatorContainer"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="css-6q0nyr-Svg"
+                    focusable="false"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    width="20"
+                  >
+                    <path
+                      d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <input
+              name="category"
+              type="hidden"
+              value="salads"
+            />
+          </div>
+        </div>
+        <div
+          class="sc-AxmLO bDjjog"
+        >
+          <label
+            class="sc-fzozJi dDbuzB"
+            for="textarea-description"
+          >
+            Description
+          </label>
+          <textarea
+            id="textarea-description"
+            name="description"
+          >
+            Mix
+          </textarea>
+          <span />
+        </div>
+        <div>
+          <button
+            class="sc-AxjAm kEbvLn"
+            type="submit"
+          >
+            Update
+          </button>
+          <button
+            class="sc-AxjAm kEbvLn"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </li>
+  <li>
+    <article
+      class="sc-AxirZ cCNcbZ"
+    >
+      <figure
+        class="sc-AxiKw fTVzhM"
+      >
+        <img
+          alt="recipe"
+          src="https://recipeImage"
+        />
+      </figure>
+      <div
+        class="sc-AxhCb gfhnFM"
+      >
+        <a
+          href="/recipes/1e57e90u2"
+        >
+          <h2>
+            Pumpkin soup
+          </h2>
+        </a>
+        <p
+          class="sc-AxhUy fKXHwN"
+        >
+          <strong>
+            Ingredients:
+          </strong>
+          <br />
+          pumpkin potato onion carrot
+        </p>
+        <p
+          class="sc-AxhUy fKXHwN"
+        >
+          <strong>
+            Description:
+          </strong>
+          <br />
+          Cook
+        </p>
+        <div
+          class="sc-AxheI fnPZGm"
+        >
+          <button
+            class="sc-AxjAm kEbvLn rounded"
+            title="edit"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-edit fa-w-18 "
+              data-icon="edit"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 576 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <button
+            class="sc-AxjAm kEbvLn rounded"
+            title="delete"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-trash-alt fa-w-14 "
+              data-icon="trash-alt"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </li>
+  <li>
+    <article
+      class="sc-AxirZ cCNcbZ"
+    >
+      <figure
+        class="sc-AxiKw fTVzhM"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-utensils fa-w-13 "
+          data-icon="utensils"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          viewBox="0 0 416 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M207.9 15.2c.8 4.7 16.1 94.5 16.1 128.8 0 52.3-27.8 89.6-68.9 104.6L168 486.7c.7 13.7-10.2 25.3-24 25.3H80c-13.7 0-24.7-11.5-24-25.3l12.9-238.1C27.7 233.6 0 196.2 0 144 0 109.6 15.3 19.9 16.1 15.2 19.3-5.1 61.4-5.4 64 16.3v141.2c1.3 3.4 15.1 3.2 16 0 1.4-25.3 7.9-139.2 8-141.8 3.3-20.8 44.7-20.8 47.9 0 .2 2.7 6.6 116.5 8 141.8.9 3.2 14.8 3.4 16 0V16.3c2.6-21.6 44.8-21.4 48-1.1zm119.2 285.7l-15 185.1c-1.2 14 9.9 26 23.9 26h56c13.3 0 24-10.7 24-24V24c0-13.2-10.7-24-24-24-82.5 0-221.4 178.5-64.9 300.9z"
+            fill="currentColor"
+          />
+        </svg>
+      </figure>
+      <div
+        class="sc-AxhCb gfhnFM"
+      >
+        <a
+          href="/recipes/1e58e90u2"
+        >
+          <h2>
+            Cake
+          </h2>
+        </a>
+        <p
+          class="sc-AxhUy fKXHwN"
+        >
+          <strong>
+            Ingredients:
+          </strong>
+          <br />
+          flour sugar eggs oil cacao
+        </p>
+        <p
+          class="sc-AxhUy fKXHwN"
+        >
+          <strong>
+            Description:
+          </strong>
+          <br />
+          Cook
+        </p>
+        <div
+          class="sc-AxheI fnPZGm"
+        >
+          <button
+            class="sc-AxjAm kEbvLn rounded"
+            title="edit"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-edit fa-w-18 "
+              data-icon="edit"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 576 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <button
+            class="sc-AxjAm kEbvLn rounded"
+            title="delete"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-trash-alt fa-w-14 "
+              data-icon="trash-alt"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </li>
+</ul>
+`;

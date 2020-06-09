@@ -15,11 +15,11 @@ const FieldActions = styled.div`
 
 const AuthForm = props => {
   const {
-    user: { email },
+    user: { email, uid },
     pageName,
     history,
   } = props;
-  const [user, setUser] = useState({ email, password: '' });
+  const [user, setUser] = useState({ email, uid, password: '' });
   const { signUpUser, signInUser } = useAuth();
 
   const onChangeField = event => {
@@ -33,9 +33,11 @@ const AuthForm = props => {
     if (e) e.preventDefault();
 
     if (pageName === 'Login') {
-      return signInUser(user.email, user.password, redirectToHome);
+      signInUser(user.email, user.password);
+      return redirectToHome();
     }
-    return signUpUser(user.email, user.password, redirectToHome);
+    signUpUser(user.email, user.password);
+    return redirectToHome();
   };
 
   return (

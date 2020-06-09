@@ -17,13 +17,25 @@ describe('Recipe api', () => {
   test('should return recipes from firestore', async () => {
     // Arrange
     const spyFirestoreGet = jest.spyOn(currentUserDoc, 'get');
+    const expectedResult = recipes;
 
     // Act
     const actualResult = await recipeService.getList();
 
     // Assert
     expect(spyFirestoreGet).toHaveBeenCalled();
-    expect(actualResult).toEqual(recipes);
+    expect(actualResult).toEqual(expectedResult);
+  });
+
+  test('should return recipe details from firestore', async () => {
+    // Arrange
+    const spyFirestoreGet = jest.spyOn(currentUserDoc, 'get');
+
+    // Act
+    await recipeService.getItem(recipes[0].id);
+
+    // Assert
+    expect(spyFirestoreGet).toHaveBeenCalled();
   });
 
   test('should add new recipe to firestore', async () => {

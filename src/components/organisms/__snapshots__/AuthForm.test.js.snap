@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthForm component should render login form 1`] = `
+<form
+  class="sc-AxhCb louZza"
+  data-testid="test-login-form"
+>
+  <div
+    class="sc-AxirZ ifDUjn"
+  >
+    <label
+      class="sc-AxiKw bpwopD"
+      for="input-email"
+    >
+      Email
+    </label>
+    <input
+      id="input-email"
+      name="email"
+      type="email"
+      value=""
+    />
+    <span />
+  </div>
+  <div
+    class="sc-AxirZ ifDUjn"
+  >
+    <label
+      class="sc-AxiKw bpwopD"
+      for="input-password"
+    >
+      Password
+    </label>
+    <input
+      id="input-password"
+      name="password"
+      type="password"
+      value=""
+    />
+    <span />
+  </div>
+  <div
+    class="sc-AxhUy hPJHzO"
+  >
+    <a
+      href="/registration"
+    >
+      Registration
+    </a>
+    <button
+      class="sc-AxjAm kEbvLn"
+      type="submit"
+    >
+      Login
+    </button>
+  </div>
+</form>
+`;
+
+exports[`AuthForm component should render registration form 1`] = `
+<form
+  class="sc-AxhCb louZza"
+  data-testid="test-registration-form"
+>
+  <div
+    class="sc-AxirZ ifDUjn"
+  >
+    <label
+      class="sc-AxiKw bpwopD"
+      for="input-email"
+    >
+      Email
+    </label>
+    <input
+      id="input-email"
+      name="email"
+      type="email"
+      value="test@test.com"
+    />
+    <span />
+  </div>
+  <div
+    class="sc-AxirZ ifDUjn"
+  >
+    <label
+      class="sc-AxiKw bpwopD"
+      for="input-password"
+    >
+      Password
+    </label>
+    <input
+      id="input-password"
+      name="password"
+      type="password"
+      value=""
+    />
+    <span />
+  </div>
+  <div
+    class="sc-AxhUy hPJHzO"
+  >
+    <a
+      href="/login"
+    >
+      Login
+    </a>
+    <button
+      class="sc-AxjAm kEbvLn"
+      type="submit"
+    >
+      Registration
+    </button>
+  </div>
+</form>
+`;

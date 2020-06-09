@@ -5,11 +5,8 @@ import { getList } from '../services/recipeService';
 
 const useRecipeList = () => {
   const recipeList = useSelector(state => state.recipes, shallowEqual);
-  const userId = useSelector(state => state.user.uid, shallowEqual);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const existedData = JSON.parse(localStorage.getItem('userData'));
-  const isRecipesExists = existedData ? existedData.recipes.length : false;
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -25,12 +22,13 @@ const useRecipeList = () => {
         setLoading(false);
       }
     };
-    if (userId && !isRecipesExists) {
+
+    if (!recipeList.length) {
       getRecipes();
     }
 
-    return () => isRecipesExists;
-  }, [isRecipesExists, userId, dispatch]);
+    return () => !!recipeList.length;
+  }, [recipeList, dispatch]);
 
   return {
     loading,

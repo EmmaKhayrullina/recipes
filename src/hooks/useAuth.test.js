@@ -12,19 +12,19 @@ const showAlert = jest.fn();
 const mockUseAlert = jest.fn(() => ({ showAlertMessage: showAlert }));
 useAlert.mockImplementation(mockUseAlert);
 
-beforeAll(() => {
-  jest.useFakeTimers();
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
-  jest.useRealTimers();
-});
-
 describe('useAuth hook', () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.resetModules();
+    jest.restoreAllMocks();
+    jest.useRealTimers();
+  });
+
   const wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
   const { result } = renderHook(() => useAuth(), { wrapper });
-  const { showAlertMessage } = useAlert();
 
   test('should register user', () => {
     // Arrange
@@ -55,6 +55,7 @@ describe('useAuth hook', () => {
   test('should logout user', () => {
     // Arrange
     const spySignOutUser = jest.spyOn(authService, 'signOut');
+    const { showAlertMessage } = useAlert();
 
     // Act
     act(() => {
@@ -64,5 +65,18 @@ describe('useAuth hook', () => {
     // Assert
     expect(spySignOutUser).toHaveBeenCalled();
     expect(showAlertMessage).toHaveBeenCalled();
+  });
+
+  test('should check user session', () => {
+    // Arrange
+    const spyInitAuth = jest.spyOn(authService, 'initAuth');
+
+    // Act
+    act(() => {
+      jest.advanceTimersByTime(100);
+      result.current.checkUserSession();
+    });
+    // Assert
+    expect(spyInitAuth).toHaveBeenCalled();
   });
 });

@@ -14,7 +14,7 @@ export const getList = async () => {
     let userRecipes;
 
     if (doc.exists) {
-      const { recipes } = doc.exists ? doc.data() : null;
+      const recipes = doc.exists ? doc.data() : null;
       userRecipes = Object.keys(recipes).map(recipe => recipes[recipe]);
     }
 
@@ -22,6 +22,22 @@ export const getList = async () => {
       return userRecipes;
     }
     return false;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+export const getItem = async id => {
+  try {
+    const userId = auth.currentUser.uid;
+
+    const doc = await db
+      .collection('users')
+      .doc(`${userId}`)
+      .get();
+    const recipes = doc.exists ? doc.data() : null;
+
+    return recipes[id];
   } catch (e) {
     throw new Error(e);
   }
@@ -44,7 +60,7 @@ export const updateItem = updatedData => {
     .doc(`${userId}`)
     .set(
       {
-        recipes: { [updatedData.id]: updatedData },
+        [updatedData.id]: updatedData,
       },
       { merge: true },
     );
@@ -57,6 +73,6 @@ export const deleteItem = id => {
     .collection('users')
     .doc(`${userId}`)
     .update({
-      [`recipes.${id}`]: firebase.firestore.FieldValue.delete(),
+      [`${id}`]: firebase.firestore.FieldValue.delete(),
     });
 };

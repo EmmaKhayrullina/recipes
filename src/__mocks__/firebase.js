@@ -22,12 +22,27 @@ mocksdk
   .firestore()
   .collection('users')
   .doc(user.uid)
-  .set({ recipes });
+  .set({ ...recipes });
 
 mocksdk
   .firestore()
   .collection('recipes')
   .doc('categories')
   .set({ list: ['All', 'Soups', 'Salads', 'Cakes'] });
+
+mocksdk.storage().ref = jest.fn(() => ({
+  child: jest.fn(() => ({
+    put: jest.fn(() =>
+      Promise.resolve({
+        snapshot: {
+          ref: {
+            getDownloadURL: jest.fn(),
+          },
+        },
+      }),
+    ),
+    delete: jest.fn(() => Promise.resolve(true)),
+  })),
+}));
 
 export default mocksdk;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { faEdit, faTrashAlt, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
@@ -65,7 +66,7 @@ const Actions = styled.div`
   transform: translateY(-50%);
 `;
 
-const Recipe = ({ recipe }) => {
+const RecipeItem = ({ recipe }) => {
   const { id, title, ingredients, description, image, isEdit } = recipe;
   const { deleteRecipe, editRecipe } = useRecipe();
   const { deleteImage } = useImageFile(image);
@@ -90,9 +91,9 @@ const Recipe = ({ recipe }) => {
         <Photo>{image ? <img src={image.url} alt="recipe" /> : <FontAwesomeIcon icon={faUtensils} />}</Photo>
 
         <Description>
-          <a href={`/${id}`}>
+          <Link to={`recipes/${id}`}>
             <h2>{title}</h2>
-          </a>
+          </Link>
 
           <Text>
             <strong>Ingredients:</strong>
@@ -118,4 +119,4 @@ const Recipe = ({ recipe }) => {
   );
 };
 
-export default Recipe;
+export default RecipeItem;

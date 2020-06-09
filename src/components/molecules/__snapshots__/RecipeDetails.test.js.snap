@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetails component render recipe details 1`] = `
+<article
+  data-testid="test-recipe-details"
+>
+  <h1
+    class="sc-AxjAm kqDOSG"
+  >
+    Pumpkin soup
+  </h1>
+  <div
+    class="sc-AxirZ FOtfm"
+  >
+    <div
+      class="sc-AxiKw hkJvxZ"
+    >
+      <h2
+        class="sc-AxhCb kXrYeE"
+      >
+        Ingredients:
+      </h2>
+      <p
+        class="sc-AxhUy igyvKH"
+      >
+        pumpkin potato onion carrot
+      </p>
+      <h2
+        class="sc-AxhCb kXrYeE"
+      >
+        Description:
+      </h2>
+      <p
+        class="sc-AxhUy igyvKH"
+      >
+        Cook
+      </p>
+    </div>
+    <figure
+      class="sc-AxgMl fQtgwy"
+    >
+      <img
+        alt="recipe"
+        src="https://recipeImage"
+      />
+    </figure>
+  </div>
+</article>
+`;

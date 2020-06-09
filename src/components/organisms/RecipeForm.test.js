@@ -75,6 +75,10 @@ describe('RecipeForm component', () => {
     const { closeModal } = useModal();
 
     // Act
+    container.find('input[name="title"]').simulate('change', { target: { name: 'title', value: 'Test title' } });
+    container
+      .find('textarea[name="ingredients"]')
+      .simulate('change', { target: { name: 'ingredients', value: 'Test ingredients' } });
     container.find('form').simulate('submit');
 
     // Assert
@@ -97,6 +101,20 @@ describe('RecipeForm component', () => {
     // Assert
     expect(recipeFields).toEqual(recipe);
     expect(deleteOldImage).toHaveBeenCalled();
+    expect(editRecipe).toHaveBeenCalled();
+  });
+
+  test('should cancel form with recipe data', () => {
+    // Arrange
+    const recipe = recipesData[0];
+    useRecipeForm(recipe);
+    const { editRecipe } = useRecipe();
+
+    // Act
+    container = renderRecipeForm(recipe);
+    container.find('button[type="button"]').simulate('click');
+
+    // Assert
     expect(editRecipe).toHaveBeenCalled();
   });
 

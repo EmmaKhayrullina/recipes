@@ -10,7 +10,7 @@ const useRecipe = () => {
   const addNewRecipe = async recipe => {
     const newId = Date.now().toString(32);
     const newRecipe = { ...recipe, id: newId };
-    const newData = { recipes: { [newId]: newRecipe } };
+    const newData = { [newId]: newRecipe };
 
     await createItem(newData).then(() => {
       dispatch(addRecipe(newRecipe));

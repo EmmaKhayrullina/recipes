@@ -1,15 +1,9 @@
-import { UPDATE_RECIPE, ADD_RECIPE, REMOVE_RECIPE, FETCH_RECIPES, REMOVE_ALL_RECIPES } from './actionTypes';
+import { UPDATE_RECIPE, ADD_RECIPE, REMOVE_RECIPE, FETCH_RECIPES } from './actionTypes';
 
 export const fetchRecipes = recipes => {
   return {
     type: FETCH_RECIPES,
     payload: recipes,
-  };
-};
-
-export const removeAllRecipes = () => {
-  return {
-    type: REMOVE_ALL_RECIPES,
   };
 };
 
